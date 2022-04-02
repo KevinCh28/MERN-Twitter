@@ -1,0 +1,9 @@
+.nav-bar-container {
+  display: flex;
+  height: 70px;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 0 50px;
+}
+
