@@ -5,7 +5,8 @@ const db = require("./config/keys").mongoURI;
 const users = require("./routes/api/users");
 const tweets = require("./routes/api/tweets");
 const bodyParser = require("body-parser");        //tells our app what sort of request it should respond to
-const User = require("./models/User");
+const passport = require("passport");
+
 
 mongoose
   .connect(db, { useNewUrlParser: true })       //returns a promise
@@ -17,14 +18,11 @@ app.use(bodyParser.urlencoded({ extended: false }));    //tell our app to respon
 app.use(bodyParser.json());     //tell our app to respond to json request
 
 app.get("/", (req, res) => {        //root
-  // const user = new User({
-  //   handle: "jim",
-  //   email: "jim@mail.com",
-  //   password: "password"
-  // })
-  // user.save();
   res.send("Hello World!");
 });
+
+app.use(passport.initialize());
+require('./config/passport')(passport);
 
 app.use("/api/users", users);
 app.use("/api/tweets", tweets);
